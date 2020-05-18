@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-// use this file and set it equal to "groceries"
+// use this file and call it "groceries"
 const groceries = require("./routes/api/groceries");
 
 const app = express();
@@ -26,6 +26,6 @@ mongoose
 // app.use mounts the path on "/groceries" to "routes/api/groceries.js"
 app.use("/groceries", groceries);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on Port: ${port}`));
