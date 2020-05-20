@@ -20,7 +20,7 @@ class GroceryList extends Component {
   render() {
     const { items } = this.state;
     return (
-      <div>
+      <div className="section">
         <Button
           color="primary"
           variant="contained"
@@ -35,23 +35,23 @@ class GroceryList extends Component {
         >
           Add an item
         </Button>
-        <List component="nav" aria-label="main-shopping-list">
-          <ListItem button>
-            {items.map(({ name }) => (
-              <ListItem>
-                <ListItemIcon>
-                  <DeleteIcon
-                    onClick={() => {
-                      this.setState((state) => ({
-                        items: state.items.filter((item) => item.name !== name),
-                      }));
-                    }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={name} />
-              </ListItem>
-            ))}
-          </ListItem>
+        <List component="ul" aria-label="main-shopping-list">
+          {/* <ListItem button> */}
+          {items.map(({ name }) => (
+            <ListItem>
+              <ListItemIcon className="icon-container">
+                <DeleteIcon
+                  className="icon-delete"
+                  onClick={() => {
+                    this.setState((state) => ({
+                      items: state.items.filter((item) => item.name !== name),
+                    }));
+                  }}
+                />
+              </ListItemIcon>
+              <ListItemText primary={name} />
+            </ListItem>
+          ))}
         </List>
       </div>
     );
