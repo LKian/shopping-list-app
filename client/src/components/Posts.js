@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core/";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -21,7 +21,6 @@ function Posts(props) {
                   alt="Contemplative Reptile"
                   height="150"
                   image={post.image}
-                  title="Contemplative Reptile"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
@@ -31,11 +30,11 @@ function Posts(props) {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button href="##" size="small" color="primary">
                   Share
                 </Button>
-                <Button size="small" color="primary">
-                  Learn More
+                <Button href="##" size="small" color="secondary">
+                  Read More{" "}
                 </Button>
               </CardActions>
             </Card>
