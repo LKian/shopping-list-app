@@ -20,27 +20,27 @@ class Navbar extends Component {
     return (
       <AppBar color="primary" position="static">
         <Toolbar>
-          <TypoGraphy variant="title" color="inherit">
-            <a class="nav-logo" href="https://leahkahwadjian.com">
+          <TypoGraphy color="inherit">
+            <a className="nav-logo" href="https://leahkahwadjian.com">
               L / K
             </a>
           </TypoGraphy>
           <List component="nav">
             <ListItem component="div">
               <ListItemText inset>
-                <TypoGraphy color="inherit" variant="title">
+                <TypoGraphy color="inherit">
                   Link 1 <Home />
                 </TypoGraphy>
               </ListItemText>
 
               <ListItemText inset>
-                <TypoGraphy color="inherit" variant="title">
+                <TypoGraphy color="inherit">
                   Link 2 <Book />
                 </TypoGraphy>
               </ListItemText>
 
               <ListItemText inset>
-                <TypoGraphy color="inherit" variant="title">
+                <TypoGraphy color="inherit">
                   Link 3 <AccountBox />
                 </TypoGraphy>
               </ListItemText>
