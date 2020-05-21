@@ -3,6 +3,14 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+}
+
+.App {
+  width: 100%;
+}
+
 .nav-logo {
   text-decoration: none;
   color: #fff;
@@ -18,7 +26,13 @@
   color: #c4302b;
 }
 
+.main-shopping-list .MuiListItem-root {
+  border: 1px solid #ccc;
+}
+
 .section {
   width: 100%;
-  padding: 50px 25px;
+  max-width: 1000px;
+  padding: 25px;
+  margin: auto;
 }
