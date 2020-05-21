@@ -8,7 +8,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 class GroceryList extends Component {
   state = {
-    items: [
+    groceryItem: "",
+    groceryList: [
       { name: "Milk", id: "Milk1" },
       { name: "Eggs", id: "Eggs1" },
       { name: "Lettuce", id: "Lettuce1" },
@@ -17,42 +18,60 @@ class GroceryList extends Component {
     ],
   };
 
+  handleChange = (e) => {
+    this.setState({ groceryItem: e.target.value });
+  };
+
+  addItem = (e) => {
+    e.preventDefault();
+
+    const groceryItem = {
+      name: this.state.groceryItem,
+      id: this.state.groceryItem,
+    };
+
+    const groceryList = [...this.state.groceryList, groceryItem];
+
+    this.setState({ groceryList, groceryItem: "" });
+  };
+
+  deleteItem = (e) => {
+    this.setState({
+      groceryList: this.state.groceryList.filter(
+        (currentGroceryItem) => currentGroceryItem.id !== e.currentTarget.id
+      ),
+    });
+  };
+
   render() {
-    const { items } = this.state;
+    const { groceryList } = this.state;
     return (
-      <div className="section">
-        <Button
-          color="primary"
-          variant="contained"
-          onClick={() => {
-            const name = prompt("Enter an Item");
-            if (name) {
-              this.setState((state) => ({
-                items: [...state.items, { name }],
-              }));
-            }
-          }}
-        >
-          Add an item
-        </Button>
-        <List component="ul" aria-label="main-shopping-list">
-          {/* <ListItem button> */}
-          {items.map(({ name }) => (
-            <ListItem>
-              <ListItemIcon className="icon-container">
-                <DeleteIcon
-                  className="icon-delete"
-                  onClick={() => {
-                    this.setState((state) => ({
-                      items: state.items.filter((item) => item.name !== name),
-                    }));
-                  }}
-                />
-              </ListItemIcon>
-              <ListItemText primary={name} />
-            </ListItem>
-          ))}
-        </List>
+      <div>
+        <form id="grocery-list-form" onSubmit={this.addItem}>
+          <div className="form-container">
+            <input
+              type="text"
+              placeholder="Add a grocery item"
+              value={this.state.groceryItem}
+              onChange={this.handleChange}
+            />
+          </div>
+          <List component="ul" aria-label="main-shopping-list">
+            {/* <ListItem button> */}
+            {groceryList.map(({ name, id }) => (
+              <ListItem key={id}>
+                <ListItemIcon className="icon-container">
+                  <DeleteIcon
+                    className="icon-delete"
+                    id={id}
+                    onClick={this.deleteItem}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={name} />
+              </ListItem>
+            ))}
+          </List>
+        </form>
       </div>
     );
   }
