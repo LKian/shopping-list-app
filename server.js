@@ -1,39 +1,25 @@
-const express = require("express");
 const cors = require("cors");
+const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.use(cors());
-var whitelist = [
-  "http://localhost:5000",
-  "http://localhost:5000/",
-  "http://localhost:3000/",
-  "http://localhost:3000",
-];
-
 // route: use this file and call it "groceries"
 const groceries = require("./routes/api/groceries");
 
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("ERROR FROM CORSOPTONS"));
-    }
-  },
-};
 // middleware: making sure the server handles incoming requests through express middleware
 
 //Enable CORS for all HTTP methods
 
 app.use(express.json());
-
-app.use(cors(corsOptions));
-
+app.use(cors());
 // info from keys
 const db = require("./config/keys").mongoURI;
+
+// restarted both.  It should be working, right?  Eveery tutorial I watched or read said to do this.  I even implemented corsOptions and a whitelist earlier.
+
+//
+//
 
 // connect to mongoDB
 mongoose
