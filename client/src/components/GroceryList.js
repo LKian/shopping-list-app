@@ -9,18 +9,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 var axios = require("axios");
 var cors = require("cors");
-//
-var whitelist = ["http://localhost:5000/, http://localhost:3000/"];
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("ERROR FROM CORSOPTONS"));
-    }
-  },
-};
-//
+
 class GroceryList extends Component {
   state = {
     groceryItem: "",
@@ -34,9 +23,19 @@ class GroceryList extends Component {
   };
 
   getAllItemsFromDB = () => {
-    axios.get("http://localhost:5000/", cors(corsOptions), (req, res) => {
-      console.log("ReeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeEsponse: ", res);
-    });
+    return (
+      axios
+        .get("http://localhost:5000/groceries/")
+        // worked - i see data! should i implement  "app.use(cors()); " // ok cool. this shoudl be be good i guess
+        // issue is we are calling localhost:5000  when we have to call localhost:5000/groceries ... if this has fixed the problem
+
+        .then(function (res) {
+          console.log("REEEEEEEEEEEEEEEES", res);
+        })
+        .catch(function (err) {
+          console.log(err);
+        })
+    );
   };
 
   handleChange = (e) => {
