@@ -1,11 +1,26 @@
 import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
+import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
+import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+var axios = require("axios");
+var cors = require("cors");
+//
+var whitelist = ["http://localhost:5000/, http://localhost:3000/"];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("ERROR FROM CORSOPTONS"));
+    }
+  },
+};
+//
 class GroceryList extends Component {
   state = {
     groceryItem: "",
@@ -16,6 +31,12 @@ class GroceryList extends Component {
       { name: "Crackers", id: "Crackers1" },
       { name: "Chicken", id: "Chicken1" },
     ],
+  };
+
+  getAllItemsFromDB = () => {
+    axios.get("http://localhost:5000/", cors(corsOptions), (req, res) => {
+      console.log("ReeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeEsponse: ", res);
+    });
   };
 
   handleChange = (e) => {
@@ -47,17 +68,16 @@ class GroceryList extends Component {
     const { groceryList } = this.state;
     return (
       <div>
+        <Button onClick={this.getAllItemsFromDB}>GET FROM DB</Button>
         <form id="grocery-list-form" onSubmit={this.addItem}>
-          <div className="form-container">
-            <input
-              type="text"
-              placeholder="Add a grocery item"
-              value={this.state.groceryItem}
-              onChange={this.handleChange}
-            />
-          </div>
+          <TextField
+            id="outlined-basic"
+            label="Add a grocery item"
+            value={this.state.groceryItem}
+            onChange={this.handleChange}
+            variant="outlined"
+          />
           <List component="ul" aria-label="main-shopping-list">
-            {/* <ListItem button> */}
             {groceryList.map(({ name, id }) => (
               <ListItem key={id}>
                 <ListItemIcon className="icon-container">

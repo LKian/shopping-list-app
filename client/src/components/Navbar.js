@@ -21,7 +21,7 @@ class Navbar extends Component {
       <AppBar color="primary" position="static">
         <Toolbar>
           <TypoGraphy color="inherit">
-            <a className="nav-logo" href="https://leahkahwadjian.com">
+            <a className="nav-logo" href="/">
               L / K
             </a>
           </TypoGraphy>
