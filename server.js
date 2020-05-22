@@ -1,14 +1,36 @@
 const express = require("express");
+const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-
-// use this file and call it "groceries"
-const groceries = require("./routes/api/groceries");
-
 const app = express();
 
-// middleware:  making sure the server handles incoming requests through express middleware
-app.use(bodyParser.json());
+app.use(cors());
+var whitelist = [
+  "http://localhost:5000",
+  "http://localhost:5000/",
+  "http://localhost:3000/",
+  "http://localhost:3000",
+];
+
+// route: use this file and call it "groceries"
+const groceries = require("./routes/api/groceries");
+
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("ERROR FROM CORSOPTONS"));
+    }
+  },
+};
+// middleware: making sure the server handles incoming requests through express middleware
+
+//Enable CORS for all HTTP methods
+
+app.use(express.json());
+
+app.use(cors(corsOptions));
 
 // info from keys
 const db = require("./config/keys").mongoURI;
