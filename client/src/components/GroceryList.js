@@ -8,11 +8,11 @@ import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 var axios = require("axios");
-var cors = require("cors");
 
 class GroceryList extends Component {
   state = {
     groceryItem: "",
+    groceryItemDB: "",
     groceryList: [
       { name: "Milk", id: "Milk1" },
       { name: "Eggs", id: "Eggs1" },
@@ -20,39 +20,60 @@ class GroceryList extends Component {
       { name: "Crackers", id: "Crackers1" },
       { name: "Chicken", id: "Chicken1" },
     ],
+    groceryListDB: [],
   };
 
   getAllItemsFromDB = () => {
-    return (
-      axios
-        .get("http://localhost:5000/groceries/")
-        // worked - i see data! should i implement  "app.use(cors()); " // ok cool. this shoudl be be good i guess
-        // issue is we are calling localhost:5000  when we have to call localhost:5000/groceries ... if this has fixed the problem
+    return axios
+      .get("http://localhost:5000/groceries/")
+      .then((res) => {
+        const groceryListDB = res.data;
 
-        .then(function (res) {
-          console.log("REEEEEEEEEEEEEEEES", res);
-        })
-        .catch(function (err) {
-          console.log(err);
-        })
-    );
+        this.setState({ groceryListDB: groceryListDB });
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
+
+  handleChangeDB = (e) => {
+    this.setState({ groceryItemDB: e.target.value });
   };
 
   handleChange = (e) => {
     this.setState({ groceryItem: e.target.value });
   };
 
-  addItem = (e) => {
+  // addItemX = (e) => {
+  //   e.preventDefault();
+
+  //   const groceryItem = {
+  //     name: this.state.groceryItem,
+  //     id: this.state.groceryItem,
+  //   };
+
+  //   const groceryList = [...this.state.groceryList, groceryItem];
+
+  //   this.setState({ groceryList, groceryItem: "" });
+  // };
+
+  addItemToDB = (e) => {
     e.preventDefault();
-
-    const groceryItem = {
-      name: this.state.groceryItem,
-      id: this.state.groceryItem,
+    const groceryItemDB = {
+      name: this.state.groceryItemDB,
+      id: this.state.groceryItemDB,
     };
-
-    const groceryList = [...this.state.groceryList, groceryItem];
-
-    this.setState({ groceryList, groceryItem: "" });
+    axios
+      .post("http://localhost:5000/groceries", groceryItemDB)
+      .then((res) => {
+        this.setState((prevState) => ({
+          groceryItemDB: "",
+          groceryListDB: [...this.state.groceryListDB, res.data.name],
+        }));
+      })
+      .catch((e) =>
+        this.setState({ error: "People who use grocery lists are no fun" })
+      );
   };
 
   deleteItem = (e) => {
@@ -64,11 +85,39 @@ class GroceryList extends Component {
   };
 
   render() {
-    const { groceryList } = this.state;
+    const { groceryList, groceryListDB } = this.state;
+    const databaseItems = groceryListDB.map((databaseItem, item, id) => (
+      <li>{databaseItem}</li>
+    ));
+
+    const groceryListElements = groceryList.map((items, key) => (
+      <ListItem key={items.id}>
+        <ListItemIcon className="icon-container">
+          <DeleteIcon
+            className="icon-delete"
+            id={items.id}
+            onClick={this.deleteItem}
+          />
+        </ListItemIcon>
+        <ListItemText primary={items.name} />
+      </ListItem>
+    ));
+
     return (
       <div>
+        <form id="grocery-list-db-form" onSubmit={this.addItemToDB}>
+          <TextField
+            id="outlined-basic-db"
+            label="Add a grocery item to the database"
+            value={this.state.groceryItemDB}
+            onChange={this.handleChangeDB}
+            variant="outlined"
+          />
+        </form>
         <Button onClick={this.getAllItemsFromDB}>GET FROM DB</Button>
-        <form id="grocery-list-form" onSubmit={this.addItem}>
+        <ul>{databaseItems}</ul>
+        <hr />
+        {/* <form id="grocery-list-form" onSubmit={this.addItem}>
           <TextField
             id="outlined-basic"
             label="Add a grocery item"
@@ -77,20 +126,9 @@ class GroceryList extends Component {
             variant="outlined"
           />
           <List component="ul" aria-label="main-shopping-list">
-            {groceryList.map(({ name, id }) => (
-              <ListItem key={id}>
-                <ListItemIcon className="icon-container">
-                  <DeleteIcon
-                    className="icon-delete"
-                    id={id}
-                    onClick={this.deleteItem}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={name} />
-              </ListItem>
-            ))}
+            {groceryListElements}
           </List>
-        </form>
+        </form> */}
       </div>
     );
   }

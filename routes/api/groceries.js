@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const newItem = new Item({
     name: req.body.name,
-    quantity: req.body.quantity,
+    // quantity: req.body.quantity,
   });
   newItem.save().then((item) => res.json(item));
 });
