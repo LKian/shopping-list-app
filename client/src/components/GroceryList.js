@@ -11,15 +11,8 @@ var axios = require("axios");
 
 class GroceryList extends Component {
   state = {
-    groceryItem: "",
     groceryItemDB: "",
-    groceryList: [
-      { name: "Milk", id: "Milk1" },
-      { name: "Eggs", id: "Eggs1" },
-      { name: "Lettuce", id: "Lettuce1" },
-      { name: "Crackers", id: "Crackers1" },
-      { name: "Chicken", id: "Chicken1" },
-    ],
+
     groceryListDB: [],
   };
 
@@ -27,6 +20,7 @@ class GroceryList extends Component {
     return axios
       .get("http://localhost:5000/groceries/")
       .then((res) => {
+        console.log("this is getallItems RES: ", res.data);
         const groceryListDB = res.data;
 
         this.setState({ groceryListDB: groceryListDB });
@@ -40,23 +34,6 @@ class GroceryList extends Component {
     this.setState({ groceryItemDB: e.target.value });
   };
 
-  handleChange = (e) => {
-    this.setState({ groceryItem: e.target.value });
-  };
-
-  // addItemX = (e) => {
-  //   e.preventDefault();
-
-  //   const groceryItem = {
-  //     name: this.state.groceryItem,
-  //     id: this.state.groceryItem,
-  //   };
-
-  //   const groceryList = [...this.state.groceryList, groceryItem];
-
-  //   this.setState({ groceryList, groceryItem: "" });
-  // };
-
   addItemToDB = (e) => {
     e.preventDefault();
     const groceryItemDB = {
@@ -68,7 +45,7 @@ class GroceryList extends Component {
       .then((res) => {
         this.setState((prevState) => ({
           groceryItemDB: "",
-          groceryListDB: [...this.state.groceryListDB, res.data.name],
+          groceryListDB: [...this.state.groceryListDB, res.data],
         }));
       })
       .catch((e) =>
@@ -77,29 +54,33 @@ class GroceryList extends Component {
   };
 
   deleteItem = (e) => {
-    this.setState({
-      groceryList: this.state.groceryList.filter(
-        (currentGroceryItem) => currentGroceryItem.id !== e.currentTarget.id
-      ),
-    });
+    // console.log("initial state: ", this.state);
+    // this.setState({
+    //   groceryItemDB: e.target.value,
+    //   groceryListDB: this.state.groceryListDB.filter(
+    //     (currentGroceryItem) => currentGroceryItem.id !== e.currentTarget.id
+    //   ),
+    // });
+    // axios
+    //   .delete(`http://localhost:5000/groceries/${e.currentTarget.id}`)
+    //   .then((res) => {
+    //     console.log("initial state: ", this.state);
+    //   });
   };
 
   render() {
     const { groceryList, groceryListDB } = this.state;
-    const databaseItems = groceryListDB.map((databaseItem, item, id) => (
-      <li>{databaseItem}</li>
-    ));
 
-    const groceryListElements = groceryList.map((items, key) => (
-      <ListItem key={items.id}>
+    const databaseItems = groceryListDB.map((databaseItem, key) => (
+      <ListItem key={databaseItem.id}>
         <ListItemIcon className="icon-container">
           <DeleteIcon
             className="icon-delete"
-            id={items.id}
+            id={databaseItem.id}
             onClick={this.deleteItem}
           />
         </ListItemIcon>
-        <ListItemText primary={items.name} />
+        <ListItemText primary={databaseItem.name} />
       </ListItem>
     ));
 
