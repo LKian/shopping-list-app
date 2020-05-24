@@ -53,34 +53,32 @@ class GroceryList extends Component {
       );
   };
 
-  deleteItem = (e) => {
-    // console.log("initial state: ", this.state);
-    // this.setState({
-    //   groceryItemDB: e.target.value,
-    //   groceryListDB: this.state.groceryListDB.filter(
-    //     (currentGroceryItem) => currentGroceryItem.id !== e.currentTarget.id
-    //   ),
-    // });
-    // axios
-    //   .delete(`http://localhost:5000/groceries/${e.currentTarget.id}`)
-    //   .then((res) => {
-    //     console.log("initial state: ", this.state);
-    //   });
+  deleteItem = (e, id) => {
+    this.setState({
+      // groceryItemDB: e.target.value,
+      groceryListDB: this.state.groceryListDB.filter(
+        (currentGroceryItem) => currentGroceryItem._id !== id
+      ),
+    });
+    axios.delete(`http://localhost:5000/groceries/${id}`).then((res) => {
+      // console.log("iddddd ", id);
+    });
   };
 
   render() {
     const { groceryList, groceryListDB } = this.state;
 
     const databaseItems = groceryListDB.map((databaseItem, key) => (
-      <ListItem key={databaseItem.id}>
+      <ListItem key={databaseItem._id}>
         <ListItemIcon className="icon-container">
           <DeleteIcon
             className="icon-delete"
             id={databaseItem.id}
-            onClick={this.deleteItem}
+            onClick={(e) => this.deleteItem(e, databaseItem._id)}
           />
         </ListItemIcon>
         <ListItemText primary={databaseItem.name} />
+        <ListItemText primary={databaseItem._id} />
       </ListItem>
     ));
 
