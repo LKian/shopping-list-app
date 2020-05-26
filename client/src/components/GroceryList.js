@@ -7,6 +7,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import TextField from "@material-ui/core/TextField";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import Container from "@material-ui/core/Container";
+
 var axios = require("axios");
 
 class GroceryList extends Component {
@@ -55,7 +57,6 @@ class GroceryList extends Component {
 
   deleteItem = (e, id) => {
     this.setState({
-      // groceryItemDB: e.target.value,
       groceryListDB: this.state.groceryListDB.filter(
         (currentGroceryItem) => currentGroceryItem._id !== id
       ),
@@ -69,21 +70,22 @@ class GroceryList extends Component {
     const { groceryList, groceryListDB } = this.state;
 
     const databaseItems = groceryListDB.map((databaseItem, key) => (
-      <ListItem key={databaseItem._id}>
-        <ListItemIcon className="icon-container">
-          <DeleteIcon
-            className="icon-delete"
-            id={databaseItem.id}
-            onClick={(e) => this.deleteItem(e, databaseItem._id)}
-          />
-        </ListItemIcon>
-        <ListItemText primary={databaseItem.name} />
-        <ListItemText primary={databaseItem._id} />
-      </ListItem>
+      <List className="list-condensed">
+        <ListItem key={databaseItem._id}>
+          <ListItemIcon className="icon-container">
+            <DeleteIcon
+              className="icon-delete"
+              id={databaseItem.id}
+              onClick={(e) => this.deleteItem(e, databaseItem._id)}
+            />
+          </ListItemIcon>
+          <ListItemText primary={databaseItem.name} />
+        </ListItem>
+      </List>
     ));
 
     return (
-      <div>
+      <Container maxWidth="lg" className="section">
         <form id="grocery-list-db-form" onSubmit={this.addItemToDB}>
           <TextField
             id="outlined-basic-db"
@@ -93,22 +95,10 @@ class GroceryList extends Component {
             variant="outlined"
           />
         </form>
-        <Button onClick={this.getAllItemsFromDB}>GET FROM DB</Button>
+        <Button onClick={this.getAllItemsFromDB}>See shopping list</Button>
         <ul>{databaseItems}</ul>
         <hr />
-        {/* <form id="grocery-list-form" onSubmit={this.addItem}>
-          <TextField
-            id="outlined-basic"
-            label="Add a grocery item"
-            value={this.state.groceryItem}
-            onChange={this.handleChange}
-            variant="outlined"
-          />
-          <List component="ul" aria-label="main-shopping-list">
-            {groceryListElements}
-          </List>
-        </form> */}
-      </div>
+      </Container>
     );
   }
 }

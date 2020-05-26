@@ -7,10 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import data from "./data-posts";
+import Container from "@material-ui/core/Container";
 
 function Posts(props) {
   return (
-    <div style={{ marginTop: 20, padding: 30 }}>
+    <Container maxWidth="lg" className="section">
       <Grid container spacing={4} justify="center">
         {data.map((post) => (
           <Grid item key={post.title}>
@@ -41,7 +42,7 @@ function Posts(props) {
           </Grid>
         ))}
       </Grid>
-    </div>
+    </Container>
   );
 }
 
