@@ -22,7 +22,7 @@ class Header extends Component {
         <Navbar />
         <br />
         <Route exact path="/" component={Home} />
-        <Route path="/grocerylist" component={GroceryList} />
+        <Route path="/groceries" component={GroceryList} />
         <Route path="/posts" component={Posts} />
         <Route path="/text" component={TextComponent} />
       </Router>

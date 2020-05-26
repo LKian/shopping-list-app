@@ -56,13 +56,19 @@ class GroceryList extends Component {
   };
 
   deleteItem = (e, id) => {
-    this.setState({
+    this.setState((prevState) => ({
       groceryListDB: this.state.groceryListDB.filter(
         (currentGroceryItem) => currentGroceryItem._id !== id
       ),
-    });
+    }));
+    console.log(`delete second part: http://localhost:5000/groceries/${id}`);
     axios.delete(`http://localhost:5000/groceries/${id}`).then((res) => {
-      // console.log("iddddd ", id);
+      console.log(
+        "this is state ",
+        this.state.groceryListDB,
+        "this is id ",
+        id
+      );
     });
   };
 
@@ -80,6 +86,7 @@ class GroceryList extends Component {
             />
           </ListItemIcon>
           <ListItemText primary={databaseItem.name} />
+          {/* <ListItemText primary={databaseItem._id} /> */}
         </ListItem>
       </List>
     ));
