@@ -7,10 +7,6 @@ body {
   margin: 0;
 }
 
-.App {
-  width: 100%;
-}
-
 .nav-logo {
   text-decoration: none;
   color: #fff;
@@ -18,21 +14,40 @@ body {
   text-shadow: 1px 2px #000;
 }
 
-.MuiListItemIcon-root.icon-container {
-  min-width: 35px;
-}
-
 .icon-delete {
   color: #c4302b;
 }
 
-.main-shopping-list .MuiListItem-root {
-  border: 1px solid #ccc;
+.MuiToolbar-regular.toolbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .section {
-  width: 100%;
-  max-width: 1000px;
-  padding: 25px;
-  margin: auto;
+  min-height: 100vh;
+  border: 2px dashed red;
+}
+
+nav.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+header .MuiContainer-root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li.MuiListItem-root {
+  width: auto;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #eee;
+}
+
+.list-condensed li {
+  padding: 0;
 }

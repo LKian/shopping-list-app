@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import TypoGraphy from "@material-ui/core/Typography";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
-import { Home, Book, AccountBox } from "@material-ui/icons";
+import { Link } from "react-router-dom";
+import Container from "@material-ui/core/Container";
 
 class Navbar extends Component {
   state = {
@@ -19,33 +18,29 @@ class Navbar extends Component {
   render() {
     return (
       <AppBar color="primary" position="static">
-        <Toolbar>
-          <TypoGraphy color="inherit">
-            <a className="nav-logo" href="/">
+        <Toolbar className="toolbar">
+          <Container maxWidth="lg">
+            <Link to="/" className="nav-link nav-logo">
               L / K
-            </a>
-          </TypoGraphy>
-          <List component="nav">
-            <ListItem component="div">
-              <ListItemText inset>
-                <TypoGraphy color="inherit">
-                  Link 1 <Home />
-                </TypoGraphy>
-              </ListItemText>
-
-              <ListItemText inset>
-                <TypoGraphy color="inherit">
-                  Link 2 <Book />
-                </TypoGraphy>
-              </ListItemText>
-
-              <ListItemText inset>
-                <TypoGraphy color="inherit">
-                  Link 3 <AccountBox />
-                </TypoGraphy>
-              </ListItemText>
-            </ListItem>
-          </List>
+            </Link>
+            <List component="nav" className="nav">
+              <ListItem component="li">
+                <Link to="/posts" className="nav-link">
+                  Posts
+                </Link>
+              </ListItem>
+              <ListItem component="li">
+                <Link to="/grocerylist" className="nav-link">
+                  Groceries
+                </Link>
+              </ListItem>
+              <ListItem component="li">
+                <Link to="text" className="nav-link">
+                  Link 3
+                </Link>
+              </ListItem>
+            </List>
+          </Container>
         </Toolbar>
       </AppBar>
     );
