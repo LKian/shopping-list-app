@@ -25,7 +25,6 @@ body {
 
 .section {
   min-height: 100vh;
-  border: 2px dashed red;
 }
 
 nav.nav {
