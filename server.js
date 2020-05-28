@@ -8,10 +8,9 @@ const app = express();
 const groceries = require("./routes/api/groceries");
 
 // middleware: making sure the server handles incoming requests through express middleware
+app.use(express.json());
 
 //Enable CORS for all HTTP methods
-
-app.use(express.json());
 app.use(cors());
 // info from keys
 const db = require("./config/keys").mongoURI;

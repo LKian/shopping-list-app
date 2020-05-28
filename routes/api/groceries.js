@@ -29,12 +29,17 @@ router.post("/", (req, res) => {
 // @access   Public
 
 router.delete("/:id", (req, res) => {
-  Item.deleteOne({ id: req.params.id }, (err) => {
-    if (err) {
-      return res.status(404).json({ success: false });
-    }
-    return res.json({ success: true });
-  });
+  try {
+    Item.deleteOne({ _id: req.params.id }, (err) => {
+      if (err) {
+        return res.status(404).json({ success: false });
+      } else {
+        return res.json({ success: req.params.id });
+      }
+    });
+  } catch (e) {
+    return res.json({ success: false });
+  }
 });
 
 module.exports = router;
