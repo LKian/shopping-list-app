@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
@@ -10,78 +9,80 @@ class Footer extends Component {
     return (
       <FooterContainer className="footer">
         <Container className="footer-container">
-          <Router>
-            <Grid container spacing={24} className="footer-subcontainer">
-              <Grid item xs={12} sm={6} md={3}>
-                <h4>header 1</h4>
-                <ul>
-                  <li>
-                    <Link to="/">Footer Link 1.1</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 1.2</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 1.2</Link>
-                  </li>
-                </ul>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <h4>header 1</h4>
-                <ul>
-                  <li>
-                    <Link to="/">Footer Link 2.1</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 2.2</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 2.3</Link>
-                  </li>
-                </ul>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <h4>header 1</h4>
-                <ul>
-                  <li>
-                    <Link to="/">Footer Link 3.1</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 3.2</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 3.3</Link>
-                  </li>
-                </ul>
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <h4>header 1</h4>
-                <ul>
-                  <li>
-                    <Link to="/">Footer Link 4.1</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 4.2</Link>
-                  </li>
-                  <li>
-                    <Link to="/">Footer Link 4.3</Link>
-                  </li>
-                </ul>
-              </Grid>
-              <Grid item xs={12} className="footer-copyright">
-                <p>
-                  &copy;{new Date().getFullYear()} <Link to="/">LK</Link>
-                </p>
-              </Grid>
+          <Grid container spacing={4} className="footer-subcontainer">
+            <Grid item xs={12} sm={6} md={3}>
+              <h4>header 1</h4>
+              <ul>
+                <li>
+                  <Link to="/">About</Link>
+                </li>
+                <li>
+                  <Link to="/">Blog</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 1.3</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 1.4</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 1.5</Link>
+                </li>
+              </ul>
             </Grid>
-          </Router>
+            <Grid item xs={12} sm={6} md={3}>
+              <h4>header 1</h4>
+              <ul>
+                <li>
+                  <Link to="/">Footer Link 2.1</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 2.2</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 2.3</Link>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <h4>Contact</h4>
+              <ul>
+                <li>
+                  <Link to="/contact">Send a Message</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 3.2</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 3.3</Link>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <h4>Social</h4>
+              <ul>
+                <li>
+                  <Link to="/">Footer Link 4.1</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 4.2</Link>
+                </li>
+                <li>
+                  <Link to="/">Footer Link 4.3</Link>
+                </li>
+              </ul>
+            </Grid>
+            <Grid item xs={12} className="footer-copyright">
+              <p>
+                &copy;{new Date().getFullYear()} <Link to="/">LK</Link>
+              </p>
+            </Grid>
+          </Grid>
         </Container>
       </FooterContainer>
     );
   }
 }
-
-export default Footer;
 
 const FooterContainer = styled.footer`
   .footer-container {
@@ -115,7 +116,7 @@ const FooterContainer = styled.footer`
     line-height: 1.4rem;
   }
 
-  ul li a {
+  a {
     color: var(--primaryLight);
     text-decoration: none;
     line-height: 1.2;
@@ -125,3 +126,5 @@ const FooterContainer = styled.footer`
     }
   }
 `;
+
+export default Footer;
