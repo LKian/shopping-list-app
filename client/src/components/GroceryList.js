@@ -157,12 +157,6 @@ const GroceryListContainer = styled.div`
     justify-content: center;
     padding: 25px 0;
   }
-  .MuiFormControl-root.MuiTextField-root:first-child .MuiOutlinedInput-root {
-    border-radius: 14px 0 0 14px;
-  }
-  .MuiFormControl-root.MuiTextField-root:nth-child(2) .MuiOutlinedInput-root {
-    border-radius: 0 10px 10px 0;
-  }
   .MuiFormControl-root.MuiTextField-root:nth-child(2) {
     max-width: 100px;
   }
@@ -180,8 +174,22 @@ const GroceryListContainer = styled.div`
   .grocery-item-quantity {
     min-width: 50px;
   }
-  .grocery-item-name {
-    text-transform: capitalize;
+  .MuiOutlinedInput-root {
+    border-radius: 0;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
+  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-name,
+  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-qty {
+    background-color: var(--primaryWhite);
+    border: 1px solid var(--primaryLight);
+  }
+  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-name {
+    border-radius: 14px 0 0 14px;
+  }
+  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-qty {
+    border-radius: 0 10px 10px 0;
   }
   .MuiListItemText-root {
     flex: 0 1 auto;
