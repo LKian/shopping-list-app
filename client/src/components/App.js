@@ -15,7 +15,6 @@ function App() {
     <div className="App">
       <Router>
         <Header />
-        <br />
         <Route exact path="/" component={Home} />
         <Route path="/groceries" component={GroceryList} />
         <Route path="/posts" component={Posts} />
