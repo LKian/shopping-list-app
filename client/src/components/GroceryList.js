@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import { Delete, Add, Receipt } from "@material-ui/icons";
 import Paper from "@material-ui/core/Paper";
 
+import { Helmet } from "react-helmet";
 var axios = require("axios");
 
 class GroceryList extends Component {
@@ -107,6 +108,9 @@ class GroceryList extends Component {
 
     return (
       <GroceryListContainer className="section">
+        <Helmet>
+          <title>Groceries</title>
+        </Helmet>
         <form id="grocery-list-db-form" onSubmit={this.handleSubmit}>
           <TextField
             id="grocery-item-name"
