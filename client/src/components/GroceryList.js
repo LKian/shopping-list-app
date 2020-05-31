@@ -172,24 +172,12 @@ const GroceryListContainer = styled.div`
     margin: auto;
   }
   .grocery-item-quantity {
-    min-width: 50px;
-  }
-  .MuiOutlinedInput-root {
-    border-radius: 0;
-  }
-  .MuiOutlinedInput-notchedOutline {
-    border: none;
+    min-width: 40px;
   }
   #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-name,
   #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-qty {
     background-color: var(--primaryWhite);
     border: 1px solid var(--primaryLight);
-  }
-  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-name {
-    border-radius: 14px 0 0 14px;
-  }
-  #grocery-list-db-form .MuiOutlinedInput-root #grocery-item-qty {
-    border-radius: 0 10px 10px 0;
   }
   .MuiListItemText-root {
     flex: 0 1 auto;
