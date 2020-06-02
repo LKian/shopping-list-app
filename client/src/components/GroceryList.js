@@ -70,13 +70,12 @@ class GroceryList extends Component {
       );
   };
 
-  deleteItem = (id) => {
-    axios.delete(`http://localhost:5000/groceries/${id}`).then((res) => {
+  deleteItem = (item) => {
+    axios.delete(`http://localhost:5000/groceries/${item._id}`).then((res) => {
       if (res.status === 200) {
-        console.log("You deleted: ", id, res);
         this.setState((prevState) => ({
           groceryListDB: this.state.groceryListDB.filter(
-            (currentGroceryItem) => currentGroceryItem._id !== id
+            (currentGroceryItem) => currentGroceryItem._id !== item._id
           ),
         }));
       }
@@ -92,7 +91,7 @@ class GroceryList extends Component {
           <Delete
             className="icon-delete"
             id={databaseItem._id}
-            onClick={(e) => this.deleteItem(databaseItem._id)}
+            onClick={(e) => this.deleteItem(databaseItem)}
           />
         </ListItemIcon>
         <ListItemText
@@ -111,32 +110,30 @@ class GroceryList extends Component {
         <Helmet>
           <title>Groceries</title>
         </Helmet>
-        <form id="grocery-list-db-form" onSubmit={this.handleSubmit}>
-          <TextField
-            id="grocery-item-name"
-            name="groceryItemName"
-            label="Name"
-            value={this.state.groceryItemName}
-            onChange={this.handleChangeDB}
-            variant="outlined"
-          />
-          <TextField
-            id="grocery-item-qty"
-            name="groceryItemQuantity"
-            label="Quantity"
-            value={this.state.groceryItemQuantity}
-            onChange={this.handleChangeDB}
-            variant="outlined"
-          />
-          <Button
-            className="button-add-to-cart"
-            // style={{ display: "none" }}
-            type={"submit"}
-          >
-            {" "}
-            <Add className="grocery-item-add" />
-          </Button>
-        </form>
+        <div className="grocery-list-container">
+          <form id="grocery-list-db-form" onSubmit={this.handleSubmit}>
+            <TextField
+              id="grocery-item-name"
+              name="groceryItemName"
+              label="Grocery Item"
+              value={this.state.groceryItemName}
+              onChange={this.handleChangeDB}
+              variant="outlined"
+            />
+            <TextField
+              id="grocery-item-qty"
+              name="groceryItemQuantity"
+              label="Quantity"
+              value={this.state.groceryItemQuantity}
+              onChange={this.handleChangeDB}
+              variant="outlined"
+            />
+            <Button className="button-add-to-cart" type={"submit"}>
+              {" "}
+              <Add className="grocery-item-add" />
+            </Button>
+          </form>
+        </div>
         <Button
           className="button-view-grocery-items"
           onClick={this.getAllItemsFromDB}
@@ -144,6 +141,7 @@ class GroceryList extends Component {
           See shopping list
           <Receipt className="grocery-item-receipt" />
         </Button>
+
         {databaseItems.length ? (
           <Paper className="grocery-list" elevation={2}>
             {databaseItems}
@@ -155,11 +153,17 @@ class GroceryList extends Component {
 }
 
 const GroceryListContainer = styled.div`
-  #grocery-list-db-form {
-    background-color: var(--primaryLight);
+  .grocery-list-container {
     display: flex;
+    width: 100%;
+    background-color: var(--primaryLight);
     justify-content: center;
     padding: 25px 0;
+  }
+  #grocery-list-db-form {
+    display: flex;
+    width: 320px;
+    justify-content: space-between;
   }
   .MuiFormControl-root.MuiTextField-root:nth-child(2) {
     max-width: 100px;

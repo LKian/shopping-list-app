@@ -7,22 +7,22 @@ import Posts from "./Posts";
 import GroceryList from "./GroceryList";
 import TextComponent from "./TextComponent";
 import ContactForm from "./ContactForm";
+import Exercises from "./Exercises/Exercises";
 import "../App.css";
 
 function App() {
   return (
-    <div>
-      <div className="App">
-        <Router>
-          <Header />
-          <Route exact path="/" component={Home} />
-          <Route path="/groceries" component={GroceryList} />
-          <Route path="/posts" component={Posts} />
-          <Route path="/text" component={TextComponent} />
-          <Route path="/contact" component={ContactForm} />
-          <Footer />
-        </Router>
-      </div>
+    <div className="App">
+      <Router>
+        <Header />
+        <Route exact path="/" component={Home} />
+        <Route path="/groceries" component={GroceryList} />
+        <Route path="/posts" component={Posts} />
+        <Route path="/text" component={TextComponent} />
+        <Route path="/contact" component={ContactForm} />
+        <Route path="/exercises" component={Exercises} />
+        <Footer />
+      </Router>
     </div>
   );
 }
