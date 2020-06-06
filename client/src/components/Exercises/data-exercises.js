@@ -14,14 +14,14 @@ export const exercises = [
     muscles: "arms",
   },
   {
-    id: "dips2",
-    title: "Dips2",
+    id: "chair-lifts",
+    title: "chair lifts",
     description: "Triceps exercise...",
     muscles: "arms",
   },
   {
-    id: "dips2",
-    title: "Dips2",
+    id: "bicep-curls",
+    title: "bicep curls",
     description: "Triceps exercise...",
     muscles: "arms",
   },
