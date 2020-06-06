@@ -11,19 +11,20 @@ class Exercises extends Component {
   getExercisesByMuscles() {
     return this.state.exercises.reduce((exercises, exercise) => {
       const { muscles } = exercise;
-      exercises[muscles] = exercises[muscles]
-        ? [...exercises[muscles], exercise]
-        : [exercise];
+
+      exercises[muscles] == null
+        ? (exercises[muscles] = [exercise])
+        : exercises[muscles].push([exercise]);
 
       return exercises;
     }, {});
   }
 
   render() {
-    console.log("Grouped exercises: ", this.getExercisesByMuscles());
+    this.getExercisesByMuscles();
     return (
       <StyledExercises className="section">
-        <ExercisesChild muscles={muscles} />
+        <ExercisesChild muscles={muscles} exercises={exercises} />
       </StyledExercises>
     );
   }
